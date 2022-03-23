@@ -1,16 +1,13 @@
-
+allScores = [];1
+currentScore = 0
 
 
 var answers = function (data, source) {
-    // console.log(source)
-    // var dataButton = document.getElementById(source+"-btn");
     var movieButton = document.getElementById("movie-btn");
     var swansonButton = document.getElementById("swanson-btn");
     movieButton.textContent = data.role;
     swansonButton.textContent = "Ron Swanson";
 };
-
-
 
 var getMovieQuote = function() {
     var movieUrl = 'https://movie-quote-api.herokuapp.com/v1/quote/'
@@ -45,9 +42,27 @@ var randomizer = function() {
 }
 
 var highscore = function() {
+    if (answers = correct) {
+        currentScore = currentScore + 10;
+    }
+    else {
+    }
+};
 
-}
 
+
+var endGame = function() {
+    for (i=0; i < allScores.length; i ++) {
+        var scoreList = document.getElementById("score-list");
+        var listEl = document.createElement('li');
+        listEl.textContent = currentScore;
+        scoreList.appendChild(listEl);
+    }
+};
+
+// highscore();
+
+//endGame();
 
 randomizer();
 
