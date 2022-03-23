@@ -1,19 +1,23 @@
 
 
 
-var answers = function (data) {
-    var answerButtons = document.getElementById("answer-btn");
+var answers = function (data, source) {
+    // console.log(source)
+    // var dataButton = document.getElementById(source+"-btn");
+    var movieButton = document.getElementById("movie-btn");
     var swansonButton = document.getElementById("swanson-btn");
-    answerButtons.textContent = data.role;
+    movieButton.textContent = data.role;
     swansonButton.textContent = "Ron Swanson";
 };
+
+
 
 var getMovieQuote = function() {
     var movieUrl = 'https://movie-quote-api.herokuapp.com/v1/quote/'
     fetch(movieUrl).then(function(response) {
         response.json().then(function(data) {
             console.log(data);
-            answers(data);
+            answers(data, "movie");
         })
     })
 }
@@ -23,11 +27,10 @@ var getSwansonQuote = function() {
     fetch(ronUrl).then(function(response) {
         response.json().then(function(data) {
             console.log(data);
-            answers(data);
+            answers(data, "swanson");
         })
     })
 }
-
 
 var randomizer = function() {
     getSwansonQuote()
@@ -40,6 +43,11 @@ var randomizer = function() {
         //displayMovieQuote();
     }
 }
+
+var highscore = function() {
+
+}
+
 
 randomizer();
 
