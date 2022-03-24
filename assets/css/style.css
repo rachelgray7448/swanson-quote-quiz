@@ -23,12 +23,12 @@
     border-color: black;
 }
 
-.btn.correct {
+.btn.green {
     --hue: var(--hue-correct);
     color: black;
 }
   
-.btn.wrong {
+.btn.red {
     --hue: var(--hue-wrong);
 }  
 
