@@ -1,6 +1,4 @@
 
-
-
 var answers = function (data, source) {
     // console.log(source)
     // var dataButton = document.getElementById(source+"-btn");
