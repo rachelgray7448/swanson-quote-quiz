@@ -2,11 +2,7 @@
 var ronUrl = "https://ron-swanson-quotes.herokuapp.com/v2/quotes"
 var movieUrl = 'https://movie-quote-api.herokuapp.com/v1/quote/'
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 var timerId;
->>>>>>> 353ac4e42e4123c26695ee6f54c61ce646519461
 var allScores = [];
 var currentScore = 0;
 
