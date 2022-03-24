@@ -7,7 +7,7 @@ var allScores = [];
 var currentScore = 0;
 
 // time function starts at whatever starting mins is and clears at 0
-const startingMins = 0.1
+const startingMins = 0.5
 let time = startingMins * 60
 var countdownEl = document.getElementById('countdown')
 
