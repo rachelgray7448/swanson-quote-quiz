@@ -16,7 +16,7 @@
 <body class="bg-gray-300 flex flex-col justify-center items-center p-0 m-0 min-w-full min-h-full">
 
     <div class = 'container w-3/4 bg-white rounded p-4 shadow-lg'>
-        <p id="countdown" class="countdown ml-1 float-right text-center inline-block font-bold">5:00</p>
+        <p id="countdown" class="countdown ml-1 float-right text-center inline-block font-bold"></p>
                     
         <div id = 'quote-container'>
             <div class="font-bold text-center" id="quote-display"></div>
@@ -25,13 +25,14 @@
                 <button id="movie-btn" class="btn"></button>
             </div>
             <div id="high-score">
-                <h2 class="text-center font-bold">High Scores:</h2>
+                <h2 id="highscore-header" class="text-center font-bold">High Scores:</h2>
                 <ol class="text-center" id=score-list></ol>
             </div>
         </div>
 
         <div class = 'controls'>
             <button id="start-btn" class="start-btn btn">Start</button>
+            <button id="next-btn" class="next-btn btn">Next</button>
         </div>
     </div>
     
