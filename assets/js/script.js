@@ -7,7 +7,7 @@ var allScores = [];
 var currentScore = 0;
 
 // time function starts at whatever starting mins is and clears at 0
-const startingMins = 0.5
+const startingMins = 0.1
 let time = startingMins * 60
 var countdownEl = document.getElementById('countdown')
 
@@ -193,6 +193,7 @@ var endGame = function () {
         var scoreList = document.getElementById("score-list");
         var listEl = document.createElement('li');
         listEl.textContent = currentScore;
+        $(listEl).addClass('text-xl font-bold p-4');
         scoreList.appendChild(listEl);
     }
 };
