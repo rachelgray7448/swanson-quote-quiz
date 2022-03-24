@@ -38,7 +38,7 @@ function updateCountdown() {
     } else {
         $(startButton).toggle();
         highscore();
-        //    endGame();
+        endGame();
 
     }
 }
@@ -119,7 +119,7 @@ function selectAnswer(event) {
         $(highscoreHeader).toggle(true);
         currentScore = currentScore + 10;
         console.log(currentScore);
-       
+    
     }
     else {
         selectedButton.classList.add('red');
@@ -148,7 +148,7 @@ function advanceQuestion() {
     swansonButtonEl.addEventListener('click', selectAnswer);
     movieButtonEl.addEventListener('click', selectAnswer);
     getQuotes()
-  
+
 }
 
 var highscore = function () {
