@@ -9,40 +9,32 @@
     <title>Swanson Quote Quiz</title>
 </head>
 
-<!--<header class="bg-blue-200 flex justify-center mx-8 my-8 rounded font-bold">
-    <span class="text-3xl">Ron Swanson Quote Quiz</span>
-</header>-->
-
-
+<header class="bg-blue-200 flex justify-center mx-8 my-8 rounded font-bold">
+    <span class="">Ron Swanson Quote Quiz</span>
+</header>
+<!--bg-gray-300-->
 <body class="bg-gray-300 flex flex-col justify-center items-center p-0 m-0 min-w-full min-h-full">
 
-    <header class="container flex justify-center">
-        <h1 class="flex items-center text-5xl mb-4">Guess That Quote!</h1>
-    </header>
-
-    <div class = 'container w-3/4 bg-white rounded p-4 shadow-lg mb-24 mt-5'>
+    <div class = 'container w-3/4 bg-white rounded p-4 shadow-lg'>
         <p id="countdown" class="countdown ml-1 float-right text-center inline-block font-bold"></p>
                     
         <div id = 'quote-container'>
             <div class="font-bold text-center" id="quote-display"></div>
-            <div id="answer-buttons" class="btn-grid grid grid-cols-2 gap-3 my-5">
-                <button id="swanson-btn" class="btn"></button>
-                <button id="movie-btn" class="btn"></button>
+            <div id="answer-buttons" >
+                <button id="swanson-btn" ></button>
+                <button id="movie-btn" ></button>
             </div>
             <div id="high-score">
-                <h2 id="highscore-header" class="text-center font-bold">High Scores:</h2>
+                <h2 id="highscore-header" class="text-center font-bold"></h2>
+                
                 <ol class="text-center" id=score-list></ol>
-
             </div>
         </div>
 
         <div class = 'controls'>
             <button id="start-btn" class="start-btn btn">Start</button>
-            <button id="next-btn" class="next-btn btn">Next</button>
+            <button id="next-btn" class="next-btn btn">HighScores</button>
         </div>
-    </div>
-    <div class="">
-        <img class="animate-bounce mt-4 object-center items-center" src="https://41.media.tumblr.com/5c9d0ddf215e61624dd1808007826fba/tumblr_mpu1daEe5M1swnmv6o1_400.png" alt="floating Ron Swanson head">
     </div>
     
     <script src="./assets/js/script.js"></script>
