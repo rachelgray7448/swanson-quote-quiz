@@ -2,6 +2,7 @@
 var ronUrl = "https://ron-swanson-quotes.herokuapp.com/v2/quotes"
 var movieUrl = 'https://movie-quote-api.herokuapp.com/v1/quote/'
 
+<<<<<<< HEAD
 var allScores = [];
 var currentScore = 0;
 
@@ -107,6 +108,11 @@ function selectAnswer(event) {
 }
 
 var answers = function (data) {
+=======
+var answers = function (data, source) {
+    // console.log(source)
+    // var dataButton = document.getElementById(source+"-btn");
+>>>>>>> feature/style
     var movieButton = document.getElementById("movie-btn");
     var swansonButton = document.getElementById("swanson-btn");
     movieButton.textContent = data.role;
