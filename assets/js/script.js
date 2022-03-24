@@ -3,6 +3,10 @@ var ronUrl = "https://ron-swanson-quotes.herokuapp.com/v2/quotes"
 var movieUrl = 'https://movie-quote-api.herokuapp.com/v1/quote/'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+var timerId;
+>>>>>>> 353ac4e42e4123c26695ee6f54c61ce646519461
 var allScores = [];
 var currentScore = 0;
 
@@ -40,6 +44,7 @@ function updateCountdown() {
     }
 }
 
+
 // main function that pulls apis and assigns values to quote and answer fields
 var getQuotes = function() {
 
@@ -54,9 +59,7 @@ var getQuotes = function() {
 
                 // experimental correct class add. need to be able to evaluate it. should probs switch to jquery
                 swansonButtonEl.classList.add('correct')
-                swansonButtonEl.addEventListener('click', function(event) {
-                    console.log('swanson button worked')
-                })
+                
             })
         })
 
@@ -77,10 +80,7 @@ var getQuotes = function() {
 
                 // experimental correct class add. need to be able to evaluate it. should probs switch to jquery
                 movieButtonEl.classList.add('correct')
-                movieButtonEl.addEventListener('click', function(event) {
-                    console.log('movie button worked')
-                    answers(data);
-                })
+                
             })
         })
     }
@@ -92,7 +92,7 @@ function startGame() {
     swansonButtonEl.textContent = "Ron Swanson";
 
     //start the countdown
-    setInterval(updateCountdown, 1000)
+    timerId = setInterval(updateCountdown, 1000);
 
     // hide the start button,
     $(startButton).toggle('hide');
@@ -102,11 +102,25 @@ function startGame() {
 }
 
 function selectAnswer(event) {    
-    var selectedButton = event.target
-    var correct = selectedButton.dataset.correct
-    console.log(correct);
+    var selectedButton = event.target;
+    var correct = selectedButton.classList.contains("correct")
+    
+    if (correct) {
+        selectedButton.classList.add('green');
+        highscoreHeader.textContent = "Correct!"
+        $(highscoreHeader).toggle(true);
+        currentScore = currentScore + 10;
+        console.log(currentScore);
+    }
+    else {
+        selectedButton.classList.add('red');
+        highscoreHeader.textContent = "Wrong!"
+        $(highscoreHeader).toggle(true);
+    }
+
 }
 
+<<<<<<< HEAD
 var answers = function (data) {
 =======
 var answers = function (data, source) {
@@ -118,12 +132,20 @@ var answers = function (data, source) {
     movieButton.textContent = data.role;
     swansonButton.textContent = "Ron Swanson";
 };
+=======
+
+>>>>>>> 353ac4e42e4123c26695ee6f54c61ce646519461
 
 // advances 'question' (resets buttons and pulls new quote)
 function advanceQuestion() {
     // reset correct status
     $(swansonButtonEl).removeClass('correct');
     $(movieButtonEl).removeClass('correct');
+    $(movieButtonEl).removeClass('red');
+    $(movieButtonEl).removeClass('green');
+    $(swansonButtonEl).removeClass('red');
+    $(swansonButtonEl).removeClass('green');
+    $(highscoreHeader).toggle(false);
 
     // pull the apis and populate info
     getQuotes()
@@ -132,6 +154,7 @@ function advanceQuestion() {
 var highscore = function() {
     if (answers = correct) {
         currentScore = currentScore + 10;
+        console.log(currentScore);
     }
     else {
     }
@@ -139,11 +162,16 @@ var highscore = function() {
 
 
 var endGame = function() {
-    $(highscoreHeader).toggle("show");
-    $(swansonButtonEl).toggle("hide");
-    $(movieButtonEl).toggle("hide");
-    $(nextButton).toggle("hide");
-    $(displayedQuoteEl).toggle("hide");
+    clearInterval(timerId);
+
+    $(highscoreHeader).textContent = "High Scores:"
+    $(highscoreHeader).toggle(true);
+    $(swansonButtonEl).toggle(false);
+    $(movieButtonEl).toggle(false);
+    $(nextButton).toggle(false);
+    $(displayedQuoteEl).toggle(false);
+
+    allScores.push(currentScore);
 
     for (i=0; i < allScores.length; i ++) {
         var scoreList = document.getElementById("score-list");
@@ -154,15 +182,17 @@ var endGame = function() {
 };
 
 
-// start-button starts the game
+// event listeners//
 
 startButton.addEventListener('click', startGame)
-
-
 nextButton.addEventListener('click', advanceQuestion)
+swansonButtonEl.addEventListener('click', function(event) {
+    selectAnswer(event)
+    console.log('swanson button worked')
+})
+movieButtonEl.addEventListener('click', function(event) {
+    selectAnswer(event);
+    console.log('movie button worked')
+})
 
-
-// highscore();
-
-//endGame();
 
