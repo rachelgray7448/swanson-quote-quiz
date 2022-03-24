@@ -112,7 +112,7 @@ function selectAnswer(event) {
     
     var selectedButton = event.target;
     var correct = selectedButton.classList.contains("correct")
-
+    
     if (correct) {
         selectedButton.classList.add('green');
         highscoreHeader.textContent = "Correct!"
@@ -127,7 +127,8 @@ function selectAnswer(event) {
         $(highscoreHeader).toggle(true);
         
     }
-
+    movieButtonEl.removeEventListener('click', selectAnswer);
+    swansonButtonEl.removeEventListener('click', selectAnswer);
 }
 
 
@@ -144,7 +145,10 @@ function advanceQuestion() {
     $(highscoreHeader).toggle(false);
 
     // pull the apis and populate info
+    swansonButtonEl.addEventListener('click', selectAnswer);
+    movieButtonEl.addEventListener('click', selectAnswer);
     getQuotes()
+  
 }
 
 var highscore = function () {
@@ -200,14 +204,15 @@ startButton.addEventListener('click', startGame)
 //nextButton used to display highscores temporarily
 nextButton.addEventListener('click', highscore)
 // nextButton.addEventListener('click', advanceQuestion)
-
-swansonButtonEl.addEventListener('click', function (event) {
+swansonButtonEl.addEventListener('click', selectAnswer);
+movieButtonEl.addEventListener('click', selectAnswer);
+// swansonButtonEl.addEventListener('click', function (event) {
     
-    selectAnswer(event)
-    console.log('swanson button worked')
-})
-movieButtonEl.addEventListener('click', function (event) {
-    selectAnswer(event);
-    console.log('movie button worked')
-})
+//     selectAnswer(event)
+//     console.log('swanson button worked')
+// })
+// movieButtonEl.addEventListener('click', function (event) {
+//     selectAnswer(event);
+//     console.log('movie button worked')
+// })
 
