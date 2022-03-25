@@ -3,9 +3,18 @@ var ronUrl = "https://ron-swanson-quotes.herokuapp.com/v2/quotes"
 var movieUrl = 'https://movie-quote-api.herokuapp.com/v1/quote/'
 
 var timerId;
-var allScores = [];
-var currentScore = 0;
 
+
+
+var currentScore = 0;
+var userInitials = "";
+var x;
+var allScores = {
+    name: userInitials,
+    score: currentScore
+};
+var finalScores = [];
+var myScores;
 
 const startingMins = 0.05
 let time = startingMins * 60
@@ -77,6 +86,10 @@ var getQuotes = function () {
 
 //start game 
 function startGame() {
+    if (myScores != null){
+        finalScores= JSON.parse(localStorage.getItem("finalScores"));
+        
+    }
     nextButton.removeEventListener('click', newGame);
     nextButton.removeEventListener('click', highscore)
     answerButtonEl.setAttribute("class", "btn-grid grid grid-cols-2 gap-3 my-5")
@@ -142,12 +155,14 @@ function advanceQuestion() {
 var endGame = function () {
     $(highscoreHeader).toggle(true);
     // highscoreHeader.textContent = "Enter Initials";
-    var x = document.createElement("INPUT");
+    highscoreHeader.textContent = "Enter Initials: "
+    x = document.createElement("INPUT");
     x.setAttribute("type", "text");
-    quoteContainer.textContent = "Enter Initials: "
+    //quoteContainer.textContent = "Enter Initials: "
     quoteContainer.appendChild(x);
     quoteContainer.setAttribute("class","quote-container");
     x.setAttribute("class","xxx");
+    x.setAttribute("id","xxx");
     nextButton.removeEventListener('click',advanceQuestion);
     clearInterval(timerId);
     $(swansonButtonEl).toggle(false);
@@ -155,19 +170,45 @@ var endGame = function () {
     $(displayedQuoteEl).toggle(false);
     nextButton.textContent = "Submit"
 
-    nextButton.addEventListener('click', highscore);
+    nextButton.addEventListener('click', loadingInput);
 
 };
+
+//loading
+var loadingInput = function (){
+    nextButton.removeEventListener('click', loadingInput);
+    allScores.name = document.querySelector("#xxx").value;
+    allScores.score = currentScore;
+    console.log(allScores.name);
+    console.log(allScores.score);
+    finalScores.push(allScores);
+    localStorage.setItem("finalScores", JSON.stringify(finalScores));
+    // quoteContainer.textContent = "High Scores: ";
+    x.remove();
+    highscore();
+}
 
 
 
 
 //high scores
 var highscore = function () {
-    
+    myScores = JSON.parse(localStorage.getItem("finalScores"));
+    $(highscoreHeader).toggle(true);
+    highscoreHeader.textContent = "High Scores:"
     $(startButton).toggle(false);
-    nextButton.removeEventListener('click', highscore);
-    //clearInterval(timerId);
+
+if(myScores != null){
+    // finalScores.push(myScores);
+    for (i = 0; i < myScores.length; i++) {
+        var scoreList = document.getElementById("score-list");
+        var listEl = document.createElement('li');
+        listEl.textContent = myScores[i].name + "  " + myScores[i].score;
+        $(listEl).addClass('text-xl font-bold p-4');
+        scoreList.appendChild(listEl);
+    }
+}
+
      nextButton.textContent = 'New Game';
      console.log("inside highscore")
      nextButton.addEventListener('click', newGame);
