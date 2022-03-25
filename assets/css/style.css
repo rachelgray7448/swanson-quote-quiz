@@ -48,3 +48,12 @@
 .hide {
     display: none;
 }
+
+.xxx{
+   background:#b4b4b4 ; 
+}
+
+.quote-container{
+    text-align: center;
+    padding: 10%;
+}
