@@ -9,4 +9,4 @@
 
 <h2>Screenshot of Website</h2>
 
-<img src="../assets/images/ron.png">
+<img src="assets/images/ron.png">
