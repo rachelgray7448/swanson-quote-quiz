@@ -1,25 +1,19 @@
 // links to api's
 var ronUrl = "https://ron-swanson-quotes.herokuapp.com/v2/quotes"
 var movieUrl = 'https://movie-quote-api.herokuapp.com/v1/quote/'
-
 var timerId;
-
-
-
+var finalScores = [];
 var currentScore = 0;
-var userInitials = "";
+var userInitials;
 var x;
+var finalScores2;
 var allScores = {
     name: userInitials,
     score: currentScore
 };
-var finalScores = [];
-var myScores;
-
-const startingMins = 0.05
+const startingMins = 0.5
 let time = startingMins * 60
 var countdownEl = document.getElementById('countdown')
-
 var swansonButtonEl = document.getElementById('swanson-btn')
 var answerButtonEl = document.getElementById('answer-buttons');
 var movieButtonEl = document.getElementById('movie-btn')
@@ -36,17 +30,13 @@ var pageContent = document.getElementById('content')
 //timer function
 function updateCountdown() {
     const minutes = Math.floor(time / 60)
-
     let seconds = time % 60
     seconds = seconds < 10 ? '0' + seconds : seconds
-
     if (time >= 0) {
         countdownEl.innerHTML = `${minutes}:${seconds}`
         time--
     } else {
-        //$(startButton).toggle();
         endGame();
-        //highscore();
     }
 }
 
@@ -86,10 +76,8 @@ var getQuotes = function () {
 
 //start game 
 function startGame() {
-    if (myScores != null){
-        finalScores= JSON.parse(localStorage.getItem("finalScores"));
-        
-    }
+
+
     nextButton.removeEventListener('click', newGame);
     nextButton.removeEventListener('click', highscore)
     answerButtonEl.setAttribute("class", "btn-grid grid grid-cols-2 gap-3 my-5")
@@ -100,12 +88,9 @@ function startGame() {
     swansonButtonEl.textContent = "Ron Swanson";
     timerId = setInterval(updateCountdown, 1000);
     $(startButton).toggle('hide');
-
     getQuotes()
-
     nextButton.addEventListener('click', advanceQuestion)
 }
-
 
 
 //select answer
@@ -142,48 +127,55 @@ function advanceQuestion() {
     $(swansonButtonEl).removeClass('red');
     $(swansonButtonEl).removeClass('green');
     $(highscoreHeader).toggle(false);
-
     swansonButtonEl.addEventListener('click', selectAnswer);
     movieButtonEl.addEventListener('click', selectAnswer);
     getQuotes()
-
 }
 
 
 
 //end game 
 var endGame = function () {
+
     $(highscoreHeader).toggle(true);
-    // highscoreHeader.textContent = "Enter Initials";
     highscoreHeader.textContent = "Enter Initials: "
     x = document.createElement("INPUT");
     x.setAttribute("type", "text");
-    //quoteContainer.textContent = "Enter Initials: "
     quoteContainer.appendChild(x);
-    quoteContainer.setAttribute("class","quote-container");
-    x.setAttribute("class","xxx");
-    x.setAttribute("id","xxx");
-    nextButton.removeEventListener('click',advanceQuestion);
+    quoteContainer.setAttribute("class", "quote-container");
+    x.setAttribute("class", "xxx");
+    x.setAttribute("id", "xxx");
+    nextButton.removeEventListener('click', advanceQuestion);
     clearInterval(timerId);
     $(swansonButtonEl).toggle(false);
     $(movieButtonEl).toggle(false);
     $(displayedQuoteEl).toggle(false);
     nextButton.textContent = "Submit"
-
     nextButton.addEventListener('click', loadingInput);
 
 };
 
 //loading
-var loadingInput = function (){
+var loadingInput = function () {
+
     nextButton.removeEventListener('click', loadingInput);
-    allScores.name = document.querySelector("#xxx").value;
+    userInitials = document.querySelector("#xxx").value;
     allScores.score = currentScore;
+    allScores.name = userInitials;
     console.log(allScores.name);
     console.log(allScores.score);
-    finalScores.push(allScores);
-    localStorage.setItem("finalScores", JSON.stringify(finalScores));
-    // quoteContainer.textContent = "High Scores: ";
+    console.log(finalScores);
+    finalScores = JSON.parse(localStorage.getItem("finalKey"));
+    if (finalScores != null) {
+        finalScores.push(allScores);
+    }
+    else {
+        finalScores = [];
+        finalScores.push(allScores);
+    }
+    console.log(currentScore);
+    console.log(userInitials);
+    localStorage.setItem("finalKey", JSON.stringify(finalScores));
     x.remove();
     highscore();
 }
@@ -193,25 +185,22 @@ var loadingInput = function (){
 
 //high scores
 var highscore = function () {
-    myScores = JSON.parse(localStorage.getItem("finalScores"));
+    finalScores2 = JSON.parse(localStorage.getItem("finalKey"));
     $(highscoreHeader).toggle(true);
     highscoreHeader.textContent = "High Scores:"
     $(startButton).toggle(false);
-
-if(myScores != null){
-    // finalScores.push(myScores);
-    for (i = 0; i < myScores.length; i++) {
-        var scoreList = document.getElementById("score-list");
-        var listEl = document.createElement('li');
-        listEl.textContent = myScores[i].name + "  " + myScores[i].score;
-        $(listEl).addClass('text-xl font-bold p-4');
-        scoreList.appendChild(listEl);
+    if (finalScores2 != null) {
+        for (i = 0; i < finalScores2.length; i++) {
+            var scoreList = document.getElementById("score-list");
+            var listEl = document.createElement('li');
+            listEl.textContent = finalScores2[i].name + "  " + finalScores2[i].score;
+            $(listEl).addClass('text-xl font-bold p-4');
+            scoreList.appendChild(listEl);
+        }
     }
-}
-
-     nextButton.textContent = 'New Game';
-     console.log("inside highscore")
-     nextButton.addEventListener('click', newGame);
+    nextButton.textContent = 'New Game';
+    console.log("inside highscore")
+    nextButton.addEventListener('click', newGame);
 
 };
 
@@ -235,35 +224,3 @@ movieButtonEl.addEventListener('click', selectAnswer);
 
 
 
-/*
-    $(highscoreHeader).textContent = "High Scores:"
-    $(highscoreHeader).toggle(true);
-    $(swansonButtonEl).toggle(false);
-    $(movieButtonEl).toggle(false);
-    $(displayedQuoteEl).toggle(false);
-    $(nextButton).toggle(false);
-
-    allScores.push(currentScore);
-
-    for (i = 0; i < allScores.length; i++) {
-        var scoreList = document.getElementById("score-list");
-        var listEl = document.createElement('li');
-        listEl.textContent = currentScore;
-        $(listEl).addClass('text-xl font-bold p-4');
-        scoreList.appendChild(listEl);
-    }
-
-
-    //high scores
-
-    startButton.textContent = "New Game?"
-    //$(startButton).toggle();
-    $(highscoreHeader).textContent = "High Scores:"
-    $(highscoreHeader).toggle(true);
-    $(swansonButtonEl).toggle(false);
-    $(movieButtonEl).toggle(false);
-    $(nextButton).toggle(false);
-    $(displayedQuoteEl).toggle(false);
-    console.log("inside highscore");
-    startButton.addEventListener("click", reload);
- */
