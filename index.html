@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Swanson Quote Quiz</title>
+</head>
+
+<header class="bg-blue-200 flex justify-center mx-8 my-8 rounded font-bold">
+    
+    <a href = "https://dancingronswanson.com/"><span class="">Guess That Quote!</span></a>
+</header>
+<!--bg-gray-300-->
+<body id="content" class="bg-gray-300 flex flex-col justify-center items-center p-0 m-0 min-w-full min-h-full">
+
+    <div class = 'container w-1/2 min-h-full bg-white rounded p-4 shadow-lg mb-24 mt-5'>
+        <p id="countdown" class="countdown ml-1 float-right text-center text-xl border border-solid border-black p-2 inline-block font-bold"></p>
+                    
+        <div id = 'quote-container'>
+            <div class="font-bold text-center text-xl" id="quote-display"></div>
+            <div id="answer-buttons" >
+                <button id="swanson-btn" ></button>
+                <button id="movie-btn" ></button>
+            </div>
+            <div id="high-score">
+                <h2 id="highscore-header" class="text-center font-bold"></h2>
+                
+                <ol class="text-center" id=score-list></ol>
+            </div>
+        </div>
+
+        <div class = 'controls'>
+            <button id="start-btn" class="start-btn btn hover:bg-blue-500">Start</button>
+            <button id="next-btn" class="next-btn btn hover:bg-blue-500">HighScores</button>
+        </div>
+    </div>
+
+    <div class="">
+        <img class="animate-bounce mt-20 object-center items-center" src="https://41.media.tumblr.com/5c9d0ddf215e61624dd1808007826fba/tumblr_mpu1daEe5M1swnmv6o1_400.png" alt="floating Ron Swanson head">
+    </div>
+    
+    <script src="./assets/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</body>
+
+</html>
